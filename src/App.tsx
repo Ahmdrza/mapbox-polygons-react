@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import { Map } from 'react-map-gl';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{height: '100vh', width: '100%'}}>
+      <Map
+        mapboxAccessToken="pk.eyJ1IjoiYWxlcGhyaSIsImEiOiJjamdwbHpycjIyZm45Mndud3AzamRibHpqIn0.ejAHwSGT6dcGxiDOrPCFLg"
+        mapStyle='mapbox://styles/mapbox/satellite-streets-v9'
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+        initialViewState={{
+          longitude: -7.949333965946522,
+          latitude: 53.4313602035036,
+          zoom: 15
+        }}
+       />
     </div>
   );
 }
