@@ -2,8 +2,15 @@
 import './App.css';
 import { GeoJSONSourceOptions } from 'mapbox-gl';
 import { Layer, Map, Source } from 'react-map-gl';
+import { useState } from 'react';
 
 function App() {
+  const [hoverInfo, setHoverInfo] = useState<{
+    x: number;
+    y: number;
+    name: string;
+  } | null>(null);
+  const [cursor, setCursor] = useState<string>('grab');
 
   const polygons: GeoJSONSourceOptions['data'] = {
     type: 'FeatureCollection',
@@ -46,6 +53,22 @@ function App() {
           latitude: 53.4313602035036,
           zoom: 15
         }}
+        cursor={cursor}
+        onMouseMove={(event) => {
+          if (event.features && event.features.length > 0) {
+            setCursor('pointer');
+            setHoverInfo({
+              x: event.point.x,
+              y: event.point.y,
+              name: event.features[0].properties?.name,
+            });
+          }
+        }}
+        onMouseLeave={() => {
+          setCursor('grab');
+          setHoverInfo(null);
+        }}
+        interactiveLayerIds={['data']}
        >
         <Source id='source' type='geojson' data={polygons}>
           <Layer
@@ -70,6 +93,16 @@ function App() {
           />
           </Source>
         </Map>
+        {hoverInfo && (
+          <div
+            className='tooltip'
+            style={{
+              left: hoverInfo.x,
+              top: hoverInfo.y,
+            }}>
+              {hoverInfo.name}
+          </div>
+        )}
     </div>
   );
 }
