@@ -1,3 +1,5 @@
+# Repo for Published Article: https://zinkworks.com/2023/06/21/a-guide-to-working-with-polygons-in-react-using-mapbox/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
